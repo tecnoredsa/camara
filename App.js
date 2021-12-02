@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { View, Text ,Pressable,StyleSheet} from 'react-native';
+import { View, Text, Pressable, StyleSheet ,Button} from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 
 
 
@@ -10,6 +9,9 @@ function Contactos() {
   return (
     <View style={styles.compo}>
       <Text>Aqui van los contactos</Text>
+      <Button
+        title="Regresar"
+        onPress={() => navigation.goBack()} />
     </View>
   )
 }
@@ -18,6 +20,9 @@ function Puntos() {
   return (
     <View style={styles.compo}>
       <Text style={styles.texto}>Aqui van los puntos</Text>
+      <Button
+        title="Regresar"
+        onPress={() => navigation.goBack()} />
     </View>
   )
 }
@@ -27,36 +32,28 @@ function Inicio({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Página o componente inicial</Text>
-      <Pressable
-      style={styles.button}
-        OnPress={() => navigation.navigate('Contactos')}>
-        <Text  style={styles.texto}>Contactos</Text>
-      </Pressable>
-      <Pressable
-        style={styles.button}
-        OnPress={() => navigation.navigate('Puntos')}>
-        <Text style={styles.texto}>Puntos</Text>
-      </Pressable>
+      <Button
+        title="Ir a contactos"
+        onPress={() => navigation.navigate('Contactos')} />
+     <Button
+        title="Ir a Puntos"
+        onPress={() => navigation.navigate('Puntos')} />
     </View>
-  )
-}
-
-
-const Stack = createNativeStackNavigator();
-  
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Inicio" component={Inicio} />
-        <Stack.Screen name="Contactos" component={Contactos} />
-        <Stack.Screen name="Puntos" component={Puntos} />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
+const Drawer = createDrawerNavigator();
 
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Inicio" component={Inicio} />
+        <Drawer.Screen name="Contactos" component={Contactos} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -88,6 +85,4 @@ const styles = StyleSheet.create({
   },
 
 });
-
-export default App;
 
